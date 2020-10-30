@@ -55,7 +55,7 @@ void code(char str[], int str1[])
 		str1[i] = (int)str[i];
 		j++;
 	}
-	cout << "Шифрованная строка: ";
+	cout << "Encrypted string: ";
 	for (i = 0; i < j; i++)
 	{
 		cout << str1[i] << ' ';
