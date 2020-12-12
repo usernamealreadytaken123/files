@@ -1,4 +1,5 @@
 global _start
+section .text
 
         call Read
         call Getdigit
@@ -13,8 +14,8 @@ global _start
 Read:
     mov eax, 3
     mov ebx, 0
-    mov ecx, a
-    mov edx, 100
+    mov ecx, num
+    mov edx, 256
     int 80h
     dec eax
 ret
@@ -36,6 +37,16 @@ Write:
     int 80h
 ret
 
+
+section .data
+    mes db 'enter number'
+    len equ $-mes
+
+
+section .bss
+    num resb 256
+    b resb 2000
+    c resb 256
 
 
 
