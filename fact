@@ -1,0 +1,43 @@
+global _start
+
+        call Read
+        call Getdigit
+        call Fact
+        call Write
+
+    mov eax, 1
+    mov ebx, 0
+    int 80h
+
+
+Read:
+    mov eax, 3
+    mov ebx, 0
+    mov ecx, a
+    mov edx, 100
+    int 80h
+    dec eax
+ret
+
+Getdigit:
+    mov ebx, 10
+    mov ecx, [esp+4]
+    cmp ecx, 0
+
+ret
+
+Fact:
+
+Write:
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, b
+    mov edx, 1024
+    int 80h
+ret
+
+
+
+
+
+
