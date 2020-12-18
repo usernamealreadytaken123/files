@@ -1,21 +1,16 @@
 SECTION .data
 	msg db '{abcdefghijklmnopqrstuvwxyz}',0xa
 	lenm equ $ - msg
-	key_a db 3
-	key_b db 4
-newLine db 0xa
 
+newLine db 0xa
+a dd 3
+b dd 4
 SECTION .bss
     array resb lenm
-
-  
-
-
 section .text
     global _start
     _start:
     mov ecx,(lenm - 1)
-   
 
     mov esi,msg
     mov edi,array 
@@ -82,10 +77,19 @@ get_letter_text:
 
 
 	encrypt:
-  mov dh,dl
-  add dl,dh
-  add dl,dh
-add dl,4
+
+sub dl,97
+mov dh,dl
+mov bx, 3
+dec bx
+while:
+dec bx
+add dl,dh
+cmp bx,0  
+ja while
+       
+ add dl,4
+
 mov al,dl
 cbw
 
@@ -93,10 +97,5 @@ mov ax,ax
 mov bl,26
 div bl
 mov dl,ah
-
-     add dl,96
-    
-     
-    
-       
-        ret
+add dl,97
+        ret       
