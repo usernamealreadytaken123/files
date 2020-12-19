@@ -39,14 +39,24 @@ void code(char str[], int str1[])
 
 }
 
-void cipher(int str1[] ,int str2[], int d, int a, int b)
+void cipher(int str1[], int str2[], int d, int a, int b)
 {
 	int j = 0;
 	for (int i = 0; i < d; i++)
+
 	{
-		str1[i] = ((a * str1[i] + b) % 26)+52;
-			
-}
+		if (str1[i] > 96)
+		{
+			str1[i] = str1[i] - 97;
+
+			str1[i] = ((a * str1[i] + b) % 26) + 97;
+		}
+		else
+		{
+			str1[i] = str1[i] - 65;
+			str1[i] = ((a * str1[i] + b) % 26) + 65;
+		}
+	}
 	for (int i = 0; i < d; i++)
 		cout << str1[i] << " ";
 }
@@ -54,15 +64,15 @@ void cipher(int str1[] ,int str2[], int d, int a, int b)
 int main()
 {
 	char str[256], str5[256];
-	int str1[256], str2[256],str6[256], a, b, c;
+	int str1[256], str2[256], str6[256], a, b, c;
 	cout << "enter string: ";
 	cin.getline(str, 256);
 	cout << "key=";
-	cin>> a;
+	cin >> a;
 	cin >> b;
 	int d = strlen(str);
-	code(str,str1);
-	cipher(str1, str2, d, a,b);
+	code(str, str1);
+	cipher(str1, str2, d, a, b);
 	decode(str5, str1, str6, d);
 	return 0;
 }
