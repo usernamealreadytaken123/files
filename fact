@@ -3,12 +3,17 @@ section .data
     mul_sign db '*'
     one db '1'
     null db '0'
-
+    a db 'Введите число ', 0xa
+    len1 equ $-d
+    b db 'Вы ввели слишком большое число', 0xa
+    len2 equ $-e
 
 
     
     
 section .bss
+num2 resb len1
+num3 resb len2
     num resb len
     outp resb 1
 
