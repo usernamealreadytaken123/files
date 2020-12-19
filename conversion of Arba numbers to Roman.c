@@ -2,29 +2,29 @@
 using namespace std;
 int main()
 {
-	int I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000, i = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, j = 0;
+	int i = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, j = 0;
 	int a;
 	cout << "enter the number:" << endl;
 	cin >> a;
-	for (int i = a; i >= M; i = i - M) {
+	for (int i = a; i >= 1000; i = i - 1000) {
 		b++;
 	}
-	for (int i = a - b * M; i >= D; i = i - D) {
+	for (int i = a - b * 1000; i >= 500; i = i - 500) {
 		c++;
 	}
-	for (int i = a - b * M - c * D; i >= C; i = i - C) {
+	for (int i = a - b * 1000 - c * 500; i >= 100; i = i - 100) {
 		d++;
 	}
-	for (int i = a - b * M - c * D - d * C; i >= L; i = i - L) {
+	for (int i = a - b * 1000 - c * 500 - d * 100; i >= 50; i = i - 50) {
 		e++;
 	}
-	for (int i = a - b * M - c * D - d * C - e * L; i >= X; i = i - X) {
+	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50; i >= 10; i = i - 10) {
 		f++;
 	}
-	for (int i = a - b * M - c * D - d * C - e * L - f * X; i >= V; i = i - V) {
+	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50 - f * 10; i >= V; i = i - 5) {
 		g++;
 	}
-	for (int i = a - b * M - c * D - d * C - e * L - f * X - g * V; i >= I; i--) {
+	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50 - f * 10 - g * 5; i >= 1; i--) {
 		j++;
 	}
 	cout << "roman number: ";
