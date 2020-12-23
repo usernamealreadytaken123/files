@@ -2,92 +2,82 @@
 using namespace std;
 int main()
 {
-	int i = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, j = 0;
+	int  i, b, c, d , e , f , g , j ;
 	int a;
-	cout << "enter the number:" << endl;
-	cin >> a;
-	for (int i = a; i >= 1000; i = i - 1000) {
-		b++;
-	}
-	for (int i = a - b * 1000; i >= 500; i = i - 500) {
-		c++;
-	}
-	for (int i = a - b * 1000 - c * 500; i >= 100; i = i - 100) {
-		d++;
-	}
-	for (int i = a - b * 1000 - c * 500 - d * 100; i >= 50; i = i - 50) {
-		e++;
-	}
-	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50; i >= 10; i = i - 10) {
-		f++;
-	}
-	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50 - f * 10; i >= V; i = i - 5) {
-		g++;
-	}
-	for (int i = a - b * 1000 - c * 500 - d * 100 - e * 50 - f * 10 - g * 5; i >= 1; i--) {
-		j++;
-	}
-	cout << "roman number: ";
+	printf("enter the number:");
+	scanf("%d", &a);
+	b = a / 1000;
+	c = a % 1000;
+	d = a % 500;
+	e = a % 100;
+	f = a % 50;
+	g = a % 10;
+	j = a % 5;
+	printf( "roman number: ");
 	for (int i = 0; i <= b - 1; i++) {
-		cout << "M";
+		printf( "M");
 	}
-	if (c == 1 && d == 4) {
-		cout << "CM";
+	if (c >= 900) {
+		printf( "CM");
 	}
-	else {
-		for (int i = 0; i <= c - 1; i++) {
-			cout << "D";
+	if (c >= 400 && c < 500)
+		printf("CD");
+	if (c>=500 && c<900)
+	{
+	
+			printf( "D");
+	}
+	if (d < 400)
+
+	{
+		if (d >= 100 && e < 90)
+			for (int i = 0; i < (d / 100); i++)
+			{
+				printf( "C");
+			}
+		if (d >= 100 && e >= 90)
+		{
+			for (int i = 0; i < (d / 100); i++)
+			{
+				printf ("C");
+			}
+		 printf("XC");
 		}
 	}
-	if (c == 1 && d == 4) {
-		d = 0;
-	}
-	else if (d == 4) {
-		cout << "CD";
-	}
-	else {
-		for (int i = 0; i <= d - 1; i++) {
-			cout << "C";
+if (d<100 && e >= 90)
+	printf("XC");
+	if (e<90 && e>=50)
+	{
+			printf("L");
 		}
+	
+	if (e < 50 && e >= 40) {
+		printf("XL");
 	}
-	if (e == 1 && f == 4) {
-		cout << "XC";
-	}
-	else {
-		for (int i = 0; i <= e - 1; i++) {
-			cout << "L";
+
+	if (f<40 && f>=10 )
+		for (int i = 0; i < (f/10) ; i++) {
+			printf("X");
 		}
+	
+	if (g == 9 ) {
+		printf ("IX");
 	}
-	if (e == 1 && f == 4) {
-		f = 0;
-	}
-	else if (f == 4) {
-		cout << "XL";
-	}
-	else {
-		for (int i = 0; i <= f - 1; i++) {
-			cout << "X";
+	if (g < 9 && g >= 5) {
+
+			printf("V");
 		}
+	
+	if (g == 4) {
+		printf("IV");
 	}
-	if (g == 1 && j == 4) {
-		cout << "IX";
-	}
-	else {
-		for (int i = 0; i <= g - 1; i++) {
-			cout << "V";
+
+	if (j <4 )
+		for (int i = 0; i < j ; i++) {
+			printf("I");
 		}
-	}
-	if (g == 1 && j == 4) {
-		j = 0;
-	}
-	else if (j == 4) {
-		cout << "IV";
-	}
-	else {
-		for (int i = 0; i <= j - 1; i++) {
-			cout << "I";
-		}
-	}
+	
 
 	return 0;
 }
+
