@@ -1,20 +1,19 @@
 SECTION .data
-	msg db '{abcdefghijklmnopqrstuvwxyz}',0xa
+	msg db 'hello',0xa
 	lenm equ $ - msg
 
 newLine db 0xa
-a dd 3
-b dd 4
+keya dw 3
+keyb dw 4
 SECTION .bss
     array resb lenm
+    
 section .text
     global _start
     _start:
     mov ecx,(lenm - 1)
-
     mov esi,msg
     mov edi,array 
-
  .letter:
     mov dl,[esi] 
     cmp dl,'z' 
@@ -80,15 +79,15 @@ get_letter_text:
 
 sub dl,97
 mov dh,dl
-mov bx, 3
+mov bx, [keya]
 dec bx
 while:
 dec bx
 add dl,dh
 cmp bx,0  
 ja while
-       
- add dl,4
+       mov bl,[keyb]
+ add dl,bl
 
 mov al,dl
 cbw
