@@ -9,7 +9,7 @@ SECTION .bss
 section .text
     global _start
     _start:
-    mov ecx,(lenm - 1)
+    mov ecx,lenm 
     mov esi,msg
     mov edi,array 
  .letter:
