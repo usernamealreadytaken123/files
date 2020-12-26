@@ -1,5 +1,5 @@
 section .data
-    len equ 100
+    len equ 255
     mul_sign db '*'
     one db '1'
     null db '0'
@@ -18,23 +18,27 @@ section .bss
 section .text
 global _start
 
-
-read:
-    mov eax, 3
-    mov ebx, 0
-    mov ecx, num
-    mov edx, len
-    int 0x80
- dec
-ret
-
-write:
+Write:
     mov eax, 4
     mov ebx, 1
     mov ecx, one
     mov edx, 1
     int 80h
 ret
+
+
+
+
+Read:
+    mov eax, 3 
+    mov ebx, 0
+    mov ecx, num
+    mov edx, len
+    int 80h
+
+    dec eax ;чтобы не учитывать в длине конец строки
+ret
+
 
 ;Функция Null выводит 0 и завершает работу программы
 ;условие входа:
@@ -89,7 +93,7 @@ Check:
 
     .check_digit:
         ;берем из строки посимвольно,т.е. еах-1 итератор по строке
-        movzx edx, byte [num + eax -1] 
+        movzx edx, byte [num + eax - 1] 
         cmp edx, '0'
         jl Correct
         cmp edx, '9'
@@ -207,9 +211,7 @@ Print_factor:
         ret
 
 _start:
-call read
-
-    
+call Read
     call Check
     xor edx,edx
 
@@ -222,21 +224,7 @@ call read
     mov ebx, 2 ;наименьший возможный множитель
     call Factorize
 
-call write
-    mov eax, 1
-    mov ebx, 0
-    int 80h
-    cmp eax, 0 
-    je Null
-
-    mov ebx, 2 
-    call Factor
-
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, one
-    mov edx, 1
-    int 80h
+call Write
 
     mov eax, 1
     mov ebx, 0
