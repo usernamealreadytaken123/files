@@ -12,7 +12,7 @@ section .text
     mov ecx,lenm 
     mov esi,msg
     mov edi,array 
- .letter:
+ .text:
     mov dl,[esi] 
     cmp dl,'z' 
     ja .save_notletter 
@@ -37,12 +37,12 @@ section .text
 
     .save_notletter:
         call get_letter_text
-        loop .letter
+        loop .text
         jmp .output
 
     .save:
         call get_letter_text
-        loop .letter
+        loop .text
         jmp .output
         
     .output:
