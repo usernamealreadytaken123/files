@@ -30,9 +30,9 @@ section .text
         cmp dl,'A'
         jb .save_notletter
         
-        add dl,20h ;
+        add dl,32 ;
         call cipher
-        sub dl,20h ;
+        sub dl,32 ;
         jmp .save
 
     .save_notletter:
