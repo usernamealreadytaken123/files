@@ -1,8 +1,6 @@
 SECTION .data
 	msg db 'hello',0xa
 	lenm equ $ - msg
-
-newLine db 0xa
 keya dw 3
 keyb dw 4
 SECTION .bss
@@ -52,12 +50,6 @@ section .text
         mov ebx,1
         mov ecx,array
         mov edx,lenm
-        int 80h
-
-        mov eax, 4
-        mov ebx, 1
-        mov ecx, newLine
-        mov edx, 1
         int 80h
 
         mov eax,1
