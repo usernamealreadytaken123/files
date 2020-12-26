@@ -4,7 +4,7 @@ section .data
     one db '1'
     null db '0'
 
-    overflow_msg db 'Вы ввели слишком большое число  '
+    overflow_msg db 'слишком большое число  '
     len_overflow_msg equ $ - overflow_msg
 
     correct_msg db 'Нужно ввести целое положительное число  '
@@ -17,6 +17,29 @@ section .bss
 
 section .text
 global _start
+
+_start:
+call Read
+    call Check
+    xor edx,edx
+
+    mov ecx, eax 
+    call Get_digit
+
+    cmp eax, 0 
+    je Null
+
+    mov ebx, 2 
+    call Factorize
+
+call Write
+
+    mov eax, 1
+    mov ebx, 0
+    int 80h
+
+
+
 
 Write:
     mov eax, 4
@@ -36,13 +59,9 @@ Read:
     mov edx, len
     int 80h
 
-    dec eax ;чтобы не учитывать в длине конец строки
+    dec eax ;
 ret
 
-
-;Функция Null выводит 0 и завершает работу программы
-;условие входа:
-;(1) 0 в еах 
 Null:
     mov eax, 4
     mov ebx, 1
@@ -54,9 +73,6 @@ Null:
     mov ebx, 0
     int 80h
 
-;Функция Correct выводит сообщение и завершает работу программы
-;условие входа:
-;(1) в еах не положительное целое число
 Correct:
     mov eax, 4
     mov ebx, 1
@@ -68,9 +84,6 @@ Correct:
     mov ebx, 0
     int 80h
 
-;Функция Overflow выводит сообщение и завершает работу программы
-;условие входа:
-;(1) OF == true
 Overflow:
     mov eax, 4
     mov ebx, 1
@@ -82,17 +95,10 @@ Overflow:
     mov ebx, 0
     int 80h
 
-;Функция Check проверяет корректность строки
-;условие входа:
-;(1) в еах длина строки
-;(2) в num строка
-;условие выхода:
-;(1) еах == 0, т.е. строка кончилась
 Check:
     push eax
 
     .check_digit:
-        ;берем из строки посимвольно,т.е. еах-1 итератор по строке
         movzx edx, byte [num + eax - 1] 
         cmp edx, '0'
         jl Correct
@@ -106,12 +112,7 @@ Check:
     pop eax
     ret
 
-;Функция Get_digit преобразует строку в число
-;условие входа:
-;(1) в есх длина строки
-;(2) в num строка
-;условие выхода:
-;(1) в еах получаем число для факторизации
+
 Get_digit:
     xor eax, eax
     mov ebp, 10
@@ -130,12 +131,7 @@ Get_digit:
 
     ret
 
-;Функция Factorize выполняет факторизацию
-;условие входа:
-;(1) в еах число
-;(2) в ebx фактор
-;условие выхода:
-;(1) в еах 1, то есть факторизация выполнена
+
 Factorize:
     cmp eax, 1
     je .return
@@ -158,11 +154,6 @@ Factorize:
     .return:
         ret
 
-;Функция Print_factor выполняет печать множителя
-;условие входа:
-;(1) в edx множитель
-;условие выхода:
-;(1) в esi 0, т.е. множитель выведен
 Print_factor:
     xor esi, esi
     push eax
@@ -175,9 +166,9 @@ Print_factor:
 
     .factor:
         mov ebx, 10
-        div ebx ;для поразрядной работы с числом
+        div ebx 
         add edx, '0'
-        push edx ;кладем на стек множитель поразрядно начиная с младшего
+        push edx 
         xor edx, edx
         inc esi
         cmp eax, 0
@@ -197,7 +188,6 @@ Print_factor:
         cmp esi, 0
         jne .output
 
-        ;выводит знак умножения
         .sign:
             mov eax, 4
             mov ebx, 1
@@ -210,22 +200,3 @@ Print_factor:
 
         ret
 
-_start:
-call Read
-    call Check
-    xor edx,edx
-
-    mov ecx, eax ;сохраняем длину строки для счетчика есх
-    call Get_digit
-
-    cmp eax, 0 ;0/n = 0
-    je Null
-
-    mov ebx, 2 ;наименьший возможный множитель
-    call Factorize
-
-call Write
-
-    mov eax, 1
-    mov ebx, 0
-    int 80h
