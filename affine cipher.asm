@@ -20,7 +20,7 @@ section .text
     cmp dl,'a' 
     jb .capital 
 
-    call encrypt
+    call cipher
     jmp .save
 
     .capital: 
@@ -31,21 +31,21 @@ section .text
         jb .save_notletter
         
         add dl,20h ;
-        call encrypt
+        call cipher
         sub dl,20h ;
         jmp .save
 
     .save_notletter:
         call get_letter_text
         loop .text
-        jmp .output
+        jmp .write
 
     .save:
         call get_letter_text
         loop .text
-        jmp .output
+        jmp .write
         
-    .output:
+    .write:
         mov eax,4
         mov ebx,1
         mov ecx,array
@@ -67,7 +67,7 @@ get_letter_text:
 
 
 
-	encrypt:
+	cipher:
 
 sub dl,97
 mov dh,dl
