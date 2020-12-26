@@ -147,14 +147,14 @@ Factorize:
     jmp Factorize
 
     .true:
-        call Print_factor
+        call Do_factor
         mov ebx, 2
         jmp Factorize
 
     .return:
         ret
 
-Print_factor:
+Do_factor:
     xor esi, esi
     push eax
     xor eax, eax
