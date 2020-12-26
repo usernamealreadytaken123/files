@@ -40,7 +40,7 @@ void cipher(int str1[], int str4[], int d, int f,int a,int b)
 					if (c == d)
 					{
 						printf("a=%d\n", a);
-						printf("a=%d\n", b);;
+						printf("a=%d\n", b);
 						goto stop;
 					}
 				}
