@@ -5,7 +5,7 @@ int main()
 	int  i, b, c, d , e , f , g , j ;
 	int a;
 	printf("enter the number:");
-	scanf("%d", &a);
+	cin >> a;
 	b = a / 1000;
 	c = a % 1000;
 	d = a % 500;
@@ -41,10 +41,10 @@ int main()
 			{
 				printf ("C");
 			}
-		 printf("XC");
+	
 		}
 	}
-if (d<100 && e >= 90)
+if ( e >= 90)
 	printf("XC");
 	if (e<90 && e>=50)
 	{
