@@ -1,11 +1,11 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+
 int main()
 {
 	int  i, b, c, d , e , f , g , j ;
 	int a;
 	printf("enter the number:");
-	cin >> a;
+	scanf("%d", &a);
 	b = a / 1000;
 	c = a % 1000;
 	d = a % 500;
@@ -79,5 +79,6 @@ if ( e >= 90)
 	
 
 	return 0;
+
 }
 
