@@ -7,7 +7,6 @@ using namespace std;
 
 
 
-
 void code(char str[], int str1[])
 {
 	int i = 0, j = 0;
