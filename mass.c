@@ -7,7 +7,7 @@ int main()
 	int a[256];
 	int i,k,n;
 	int b = 1;
-	int d = 0;
+	int e = 0;
 	int j = 1;
 	printf("enter the size of the array:");
 scanf("%d", &n);
@@ -25,8 +25,8 @@ scanf("%d", &a[i]);
 			else break;
 			j=j+1;
 		}
-			if (b > d) {
-				d = b;
+			if (b > e) {
+				e = b;
 				k = i;
 			}
 			b = 1;
