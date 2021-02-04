@@ -33,7 +33,7 @@ scanf("%d", &a[i]);
 			j = 1;
 		
 	}
-		for (i = k; i < d+k; i=i+1)
+		for (i = k; i < e+k; i=i+1)
 		{
 				printf("%d",a[i]);
 				printf(" ");
