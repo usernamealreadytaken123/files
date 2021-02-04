@@ -1,5 +1,6 @@
-#include <iostream>
-using namespace std;
+//на вход подается целочисленный массив ненулевых элементов. Программа выводит самую длинную знакопеременную последовательность
+#include <stdio.h>
+
 
 int main()
 {
@@ -9,20 +10,20 @@ int main()
 	int d = 0;
 	int j = 1;
 	printf("enter the size of the array:");
-	cin >> n;
-	for (i = 0; i < n; i++)
+scanf("%d", &n);
+	for (i = 0; i < n; i=i+1)
 	{
 		printf("a[%d] = ", i);
-	cin>>a[i];
+scanf("%d", &a[i]);
 	}
-		for (i = 0; i < n; i++)
+		for (i = 0; i < n; i=i+1)
 		{
 			while(j+i<n)
 			{
 			if (a[j+i] * a[j+i - 1] < 0)
-				b = b++;
+				b = b+1;
 			else break;
-			j++;
+			j=j+1;
 		}
 			if (b > d) {
 				d = b;
@@ -32,7 +33,10 @@ int main()
 			j = 1;
 		
 	}
-		for (i = k; i < d+k; i++)
-			cout << a[i]<<" ";
+		for (i = k; i < d+k; i=i+1)
+		{
+				printf("%d",a[i]);
+				printf(" ");
+		}
 	return 0;
 }
