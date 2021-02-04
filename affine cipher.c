@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 void decode(char str5[], int str1[], int str6[], int d)
 {
 	for (int i = 0; i < d; i++)
