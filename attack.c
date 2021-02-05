@@ -4,45 +4,46 @@
 #include <stdlib.h>
 
 
-void code(char str[], int str1[])
+
+void code(char string[], int code_string[])
 
 {
 	int i = 0, j = 0;
-	for (i = 0; str[i] != '\0'; i=i+1)
+	for (i = 0; string[i] != '\0'; i=i+1)
 	{
-		str1[i] = (int)str[i];
+		code_string[i] = (int)string[i];
 		j=j+1;
 	}
 	printf ("Encrypted string: ");
 	for (i = 0; i < j; i=i+1)
 	{
-		printf(" %d",  str1[i]);
+		printf(" %d", code_string[i]);
 	}
 	printf(" \n");
 
 }
-void cipher( int str1[], int str4[], int d, int f,int a,int b, int* e, int* g, int* h )
+void cipher( int code_string[], int code_sipherstring[], int string_len,int a,int b, int* key_a, int* key_b)
 {
 	int j = 0;
-	int c = 0;
+	int counter = 0;
 	for (int a = 1; a < 26; a = a + 2) 
 		for (int b = 0; b < 25; b = b + 1){
-			for (int i = 0; i <= d ; i=i+1)
+			for (int i = 0; i <= string_len ; i=i+1)
 			{
-					if (str4[i] == (((a * (str1[i]-97) + b) % 26) + 97))
+					if (code_sipherstring[i] == (((a * (code_string[i]-97) + b) % 26) + 97))
 					{
-						c=c+1;
+						counter = counter +1;
 				
 					}
-					if (c == d)
+					if (counter == string_len)
 					{
 				
-						*e = a;
-						*g = b;
+						*key_a = a;
+						*key_b = b;
 						goto stop;
 					}
 				}
-			c = 0;
+			counter = 0;
 			}
 	
 
@@ -59,28 +60,27 @@ stop:
 
 int main()
 {
-	char str[256], str3[256], str5[256];
-	int str1[256], c, str4[256], str6[256];
+	char string[256], sipher_string[256];
+	int code_string[256], c, code_sipherstring[256];
 	int a=1;
 	int b=0;
-	int e, g;
-	int h;
+	int key_a, key_b;
 	printf ("enter string: ");
-	gets(str);
-	int d = strlen(str);
-	code(str, str1);
+	gets(string);
+	int string_len = strlen(string);
+	code(string, code_string);
 	printf ("key=");
-	gets(str3);
-	int f = strlen(str3);
-	if (f != d) 
+	gets(sipher_string);
+	int sipher_len = strlen(sipher_string);
+	if (sipher_len != string_len) 
 		goto error;
 	
-	code(str3, str4);
-	cipher(str1, str4, d, f,a,b,&e,&g,&h);
-	if (e<0)
+	code(sipher_string, code_sipherstring);
+	cipher(code_string, code_sipherstring, string_len,a,b,&key_a,&key_b);
+	if (key_a<0)
 		goto error;
-	printf("a=%d\n", e);
-	printf("b=%d\n", g);
+	printf("a=%d\n", key_a);
+	printf("b=%d\n", key_b);
 	goto exit;
 error:
 	
