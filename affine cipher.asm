@@ -15,7 +15,7 @@ section .text
  .text:
     mov dl,[esi] 
     cmp dl,'z' 
-    ja .save_notletter 
+    ja .save
 
     cmp dl,'a' 
     jb .capital 
@@ -25,21 +25,16 @@ section .text
 
     .capital: 
         cmp dl,'Z' 
-        ja .save_notletter
+        ja .save
 
         cmp dl,'A'
-        jb .save_notletter
+        jb .save
         
         add dl,32 ;
         call cipher
         sub dl,32 ;
         jmp .save
-
-    .save_notletter:
-        call get_letter_text
-        loop .text
-        jmp .write
-
+	
     .save:
         call get_letter_text
         loop .text
