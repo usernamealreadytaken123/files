@@ -5,20 +5,20 @@
 int main()
 {
 	int arr[256];
-	int i,k,n;
+	int i,k,arr_size;
 	int b = 1;
 	int e = 0;
 	int j = 1;
 	printf("enter the size of the array:");
-scanf("%d", &n);
-	for (i = 0; i < n; i=i+1)
+scanf("%d", &arr_size);
+	for (i = 0; i < arr_size; i=i+1)
 	{
 		printf("arr[%d] = ", i);
 scanf("%d", &arr[i]);
 	}
-		for (i = 0; i < n; i=i+1)
+		for (i = 0; i < arr_size; i=i+1)
 		{
-			while(j+i<n)
+			while(j+i<arr_size)
 			{
 			if (arr[j+i] * arr[j+i - 1] < 0)
 				b = b+1;
