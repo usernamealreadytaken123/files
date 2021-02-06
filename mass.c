@@ -4,7 +4,7 @@
 
 int main()
 {
-	int a[256];
+	int arr[256];
 	int i,k,n;
 	int b = 1;
 	int e = 0;
@@ -13,14 +13,14 @@ int main()
 scanf("%d", &n);
 	for (i = 0; i < n; i=i+1)
 	{
-		printf("a[%d] = ", i);
-scanf("%d", &a[i]);
+		printf("arr[%d] = ", i);
+scanf("%d", &arr[i]);
 	}
 		for (i = 0; i < n; i=i+1)
 		{
 			while(j+i<n)
 			{
-			if (a[j+i] * a[j+i - 1] < 0)
+			if (arr[j+i] * arr[j+i - 1] < 0)
 				b = b+1;
 			else break;
 			j=j+1;
@@ -35,7 +35,7 @@ scanf("%d", &a[i]);
 	}
 		for (i = k; i < e+k; i=i+1)
 		{
-				printf("%d",a[i]);
+				printf("%d",arr[i]);
 				printf(" ");
 		}
 	return 0;
