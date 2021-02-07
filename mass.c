@@ -33,7 +33,7 @@ scanf("%d", &arr[i]);
 			j = 1;
 		
 	}
-		for (i = first_element_of_sequence; i < sequence_len+first_element_of_sequence; i=i+1)
+		for (i = first_element_of_sequence; i < sequence_len + first_element_of_sequence; i=i+1)
 		{
 				printf("%d",arr[i]);
 				printf(" ");
