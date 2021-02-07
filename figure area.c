@@ -2,7 +2,7 @@
 #include <stdlib.h>     
 #include <iomanip>      
 #include <stdio.h>    
-using namespace std;
+
 
 #define R_MAX 100       
 #define R_MIN 1         
@@ -17,9 +17,9 @@ int main(void) {
 	int n, m;
 	printf("Input array size:");
 	printf("rows = ");
-	scanf("%d", &n);
+	scanf_s("%d", &n);
 	printf("columns = ");
-	scanf("%d", &m);
+	scanf_s("%d", &m);
 	if (n < 1 || m < 1) return 1;
 
 	int ** a = memory(n, m);
@@ -33,12 +33,13 @@ int main(void) {
 
 
 int ** memory(int rows, int cols) {
-	int ** tmp = new int *[rows];
+	int ** tmp;
+	tmp = (int**)malloc(rows * sizeof(int*));
 	for (int i = 0; i < rows; i = i + 1)
-		tmp[i] = new int[cols];
+		tmp[i] = (int*)malloc(cols * sizeof(int));
+
 	return tmp;
 }
-
 
 void free_memory(int ** array, int rows, int cols) {
 	for (int i = 0; i < rows; i = i + 1)
