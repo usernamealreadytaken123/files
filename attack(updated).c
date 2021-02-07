@@ -4,6 +4,7 @@
 
 
 
+
 void code(char string[], int code_string[])
 
 {
