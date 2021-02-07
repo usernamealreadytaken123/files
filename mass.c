@@ -5,9 +5,9 @@
 int main()
 {
 	int arr[256];
-	int i,k,arr_size;
-	int b = 1;
-	int e = 0;
+	int i, first_element_of_sequence, arr_size;
+	int counter = 1;
+	int sequence_len = 0;
 	int j = 1;
 	printf("enter the size of the array:");
 scanf("%d", &arr_size);
@@ -21,19 +21,19 @@ scanf("%d", &arr[i]);
 			while(j+i<arr_size)
 			{
 			if (arr[j+i] * arr[j+i - 1] < 0)
-				b = b+1;
+				counter = counter+1;
 			else break;
 			j=j+1;
 		}
-			if (b > e) {
-				e = b;
-				k = i;
+			if (counter > sequence_len) {
+				sequence_len = counter;
+				first_element_of_sequence = i;
 			}
-			b = 1;
+			counter = 1;
 			j = 1;
 		
 	}
-		for (i = k; i < e+k; i=i+1)
+		for (i = first_element_of_sequence; i < sequence_len+first_element_of_sequence; i=i+1)
 		{
 				printf("%d",arr[i]);
 				printf(" ");
