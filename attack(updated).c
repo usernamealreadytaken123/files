@@ -25,11 +25,11 @@ void decode(int code_sipherstring[], char sipher_string[], int sipher_len)
 		if (code_sipherstring[i] != '32')
 		{
 			sipher_string[i] = (char)code_sipherstring[i];
-			printf(" %c", sipher_string[i]);
+			printf("%c", sipher_string[i]);
 		}
 		else {
 			sipher_string[i] = ' ';
-			printf(" %c", sipher_string[i]);
+			printf("%c", sipher_string[i]);
 
 		}
 	}
@@ -38,12 +38,12 @@ void decode(int code_sipherstring[], char sipher_string[], int sipher_len)
 
 
 
-void attack(int code_string[], int code_sipherstring[], int string_len, int a, int b, int key_a[], int key_b[], int sipher_len,int *c)
+void attack(int code_string[], int code_sipherstring[], int string_len, int a, int b, int key_a[], int key_b[], int sipher_len, int *c)
 {
 	char str[256];
 	int p = 0;
 	int j = 0;
-	int k=0;
+	int k = 0;
 	int counter = 0;
 	for (int i = j; i < sipher_len; i = j)
 	{
@@ -82,7 +82,7 @@ void attack(int code_string[], int code_sipherstring[], int string_len, int a, i
 			}
 			if (a % 2 == 1)
 			{
-		
+
 
 				//printf("a=%d\n", *key_a);
 				//printf("b=%d\n", *key_b);
@@ -99,30 +99,35 @@ void attack(int code_string[], int code_sipherstring[], int string_len, int a, i
 }
 
 
-void sipher(int code_sipherstring[], int sipher_len,  int key_a[],int key_b[],int c)
+void sipher(int code_sipherstring[], int sipher_len, int key_a[], int key_b[], int c,int n, int result_code[],int *m)
 {
-	for (int j = 0; j < c; j = j + 1)
+	if (n< c)
 	{
 		int k = 26;
-		while (k%key_a[j] != (key_a[j] - 1))
+		while (k%key_a[n] != (key_a[n] - 1))
 			k = k + 26;
-		key_a[j] = (k + 1) / key_a[j];
+		key_a[n] = (k + 1) / key_a[n];
 		for (int i = 0; i < sipher_len; i++)
 
 		{
-			if (code_sipherstring[i] > 96)
-			{
-				code_sipherstring[i] = code_sipherstring[i] - 97;
 
-				code_sipherstring[i] = (key_a[j] * (code_sipherstring[i] -key_b[j] + 26) % 26) + 97;
-			}
-			else
+			if (code_sipherstring[i] > 96 && code_sipherstring[i]< 123)
 			{
-				code_sipherstring[i] = code_sipherstring[i] - 65;
-				code_sipherstring[i] = (key_a[j] * (code_sipherstring[i] - key_b[j] + 26) % 26) + 65;
+				result_code[i] = code_sipherstring[i] - 97;
+
+				result_code[i] = (key_a[n] * (result_code[i] - key_b[n] + 26) % 26) + 97;
 			}
+			if (code_sipherstring[i] >64 && code_sipherstring[i]<91)
+			{
+				result_code[i] = code_sipherstring[i] - 65;
+				result_code[i] = (key_a[n] * (result_code[i] - key_b[n] + 26) % 26) + 65;
+			}
+			if (code_sipherstring[i] == 32)
+				result_code[i] = 32;
 		}
 	}
+	n = n + 1;
+	*m= n;
 	//for (int i = 0; i < sipher_len; i++)
 		//printf("%d", code_sipherstring[i]);
 }
@@ -132,11 +137,11 @@ void sipher(int code_sipherstring[], int sipher_len,  int key_a[],int key_b[],in
 int main()
 {
 	char string[256], sipher_string[256];
-	int code_string[256], code_sipherstring[256];
+	int code_string[256], code_sipherstring[256],result_code[256];
 	int a = 1;
 	int b = 0;
 	int i;
-	int c = 0;
+	int c = 0, m=0, n = 0;
 	int key_a[256], key_b[256];
 	printf("enter string: ");
 	gets_s(string);
@@ -147,9 +152,14 @@ int main()
 	int sipher_len = strlen(sipher_string);
 
 	code(sipher_string, code_sipherstring);
-	attack(code_string, code_sipherstring, string_len, a, b, key_a,key_b, sipher_len,&c);
-	sipher(code_sipherstring, sipher_len, key_a, key_b,c);
-	decode(code_sipherstring, sipher_string, sipher_len);
+	attack(code_string, code_sipherstring, string_len, a, b, key_a, key_b, sipher_len, &c);
+	while (m<c)
+	{ 
+	sipher(code_sipherstring, sipher_len, key_a, key_b, c,n, result_code,&m);
+	n = n + 1;
+	decode(result_code, sipher_string, sipher_len);
+	printf("\n");
+	}
 	//printf("a=%d\n", key_a);
 	//printf("b=%d\n", key_b);
 	return 0;
